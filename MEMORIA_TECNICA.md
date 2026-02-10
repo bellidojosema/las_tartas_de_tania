@@ -13,18 +13,23 @@ El proyecto modela el dominio de **Las Tartas de Tania**, un negocio artesanal d
 ## 2. Análisis del sistema
 ### Funcionalidades principales
 - Página de inicio informativa.
-- Inicio de sesión para acceder al área de gestión.
+- Inicio de sesión y registro para acceder al área de gestión.
 - Alta, listado, edición y borrado de productos.
 
 ### Flujo principal
 1. Usuario entra en `/`.
 2. Se autentica en `/login`.
-3. Accede a `/productos` para administrar el catálogo.
+3. Si no tiene cuenta, se registra en `/registro` y luego inicia sesión en `/login`
+4. Accede a `/productos` para administrar el catálogo.
 
 ## 3. Diseño
 ### Entidades y campos
 - **User**: `id`, `email`, `password`, `roles`, `fullName`, `phone`.
-- **Product**: `id`, `name`, `description`, `category`, `price`, `stock`, `imageUrl`, `isAvailable`.
+- **Product**: `id`, `name`, `description`, `category`, `price`, `stock`, `imageUrl`, `isAvailable`, `categoryRef`.
+- **Category**: `id`, `name`, `description`.
+- **Order**: `id`, `customer`, `createdAt`, `status`, `total`.
+- **OrderItem**: `id`, `orderRef`, `product`, `quantity`, `unitPrice`.
+- **PickupAppointment**: `id`, `user`, `pickupAt`, `status`, `notes`.
 
 ### Justificación del modelo
 - `User` permite controlar acceso y roles.

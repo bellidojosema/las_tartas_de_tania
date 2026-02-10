@@ -30,6 +30,11 @@ class Product
     #[Assert\NotBlank]
     private string $category = '';
 
+    #[ORM\ManyToOne(targetEntity: Category::class, inversedBy: 'products')]
+    #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
+    private ?Category $categoryRef = null;
+
+
     #[ORM\Column]
     #[Assert\Positive]
     private float $price = 1.0;
