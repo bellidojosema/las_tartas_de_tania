@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inicio | Las Tartas de Tania{% endblock %}
+
+{% block body %}
+    <section class="p-4 p-md-5 mb-4 bg-white rounded-3 shadow-sm border">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <h1 class="display-6 fw-bold text-danger">Las Tartas de Tania</h1>
+                <p class="lead mb-4">Gestión online de tartas y galletas caseras: catálogo, pedidos y citas de recogida.</p>
+                <div class="d-flex flex-wrap gap-2">
+                    <a class="btn btn-danger" href="{{ path('app_login') }}">Iniciar sesión</a>
+                    <a class="btn btn-outline-danger" href="{{ path('app_register') }}">Registrarte</a>
+                    <a class="btn btn-dark" href="{{ path('app_product_index') }}">Ir a productos</a>
+                </div>
+            </div>
+            <div class="col-md-4 text-center mt-4 mt-md-0">
+                <div class="display-1">🧁</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="row g-3">
+        <div class="col-md-3"><div class="card h-100 shadow-sm"><div class="card-body"><h5>Catálogo</h5><p class="mb-0 text-muted">Productos con precio, stock e imagen.</p></div></div></div>
+        <div class="col-md-3"><div class="card h-100 shadow-sm"><div class="card-body"><h5>Pedidos</h5><p class="mb-0 text-muted">Control de estado y total por pedido.</p></div></div></div>
+        <div class="col-md-3"><div class="card h-100 shadow-sm"><div class="card-body"><h5>Citas</h5><p class="mb-0 text-muted">Recogidas programadas para clientes.</p></div></div></div>
+        <div class="col-md-3"><div class="card h-100 shadow-sm"><div class="card-body"><h5>Usuarios</h5><p class="mb-0 text-muted">Acceso seguro con roles.</p></div></div></div>
+    </section>
+{% endblock %}

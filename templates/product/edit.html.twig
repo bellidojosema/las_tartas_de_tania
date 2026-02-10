@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Editar producto{% endblock %}
+
+{% block body %}
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h1 class="h4">Editar producto</h1>
+            {{ include('product/_form.html.twig', {form: form, button_label: 'Actualizar'}) }}
+            <a class="btn btn-link px-0 mt-2" href="{{ path('app_product_index') }}">Volver al listado</a>
+        </div>
+    </div>
+{% endblock %}
