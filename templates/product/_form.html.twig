@@ -1,0 +1,11 @@
+{{ form_start(form) }}
+    {{ form_row(form.name) }}
+    {{ form_row(form.description) }}
+    {{ form_row(form.category) }}
+    {{ form_row(form.price) }}
+    {{ form_row(form.stock) }}
+    {{ form_row(form.imageUrl) }}
+    {{ form_row(form.isAvailable) }}
+
+    <button class="btn">{{ button_label|default('Guardar') }}</button>
+{{ form_end(form) }}

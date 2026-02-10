@@ -1,17 +1,49 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{% block title %}Las Tartas de Tania{% endblock %}</title>
         {% block stylesheets %}
-        {% endblock %}
-
-        {% block javascripts %}
-            {% block importmap %}{{ importmap('app') }}{% endblock %}
+            <style>
+                body { font-family: Arial, sans-serif; margin: 0; background: #fff8f5; color: #3d2f2a; }
+                header { background: #f8d7da; padding: 1rem 2rem; }
+                nav a { margin-right: 1rem; color: #5c2a3a; font-weight: bold; text-decoration: none; }
+                main { max-width: 960px; margin: 1.5rem auto; background: #fff; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,.08); }
+                table { width: 100%; border-collapse: collapse; }
+                th, td { border-bottom: 1px solid #eee; padding: .6rem; text-align: left; }
+                .btn { display: inline-block; background: #b35d7f; color: white; padding: .5rem .8rem; border-radius: 6px; text-decoration: none; border: 0; cursor: pointer; }
+                .btn-secondary { background: #705d56; }
+                .btn-danger { background: #b23b3b; }
+                .flash-success { background: #e7f8ea; border: 1px solid #7db38d; padding: .8rem; border-radius: 6px; margin-bottom: 1rem; }
+                .flash-error { background: #fde8e8; border: 1px solid #d17d7d; padding: .8rem; border-radius: 6px; margin-bottom: 1rem; }
+                form > div { margin-bottom: .9rem; }
+                label { display: block; margin-bottom: .3rem; font-weight: 600; }
+                input, textarea, select { width: 100%; padding: .5rem; box-sizing: border-box; }
+            </style>
         {% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+        <header>
+            <nav>
+                <a href="{{ path('app_home') }}">Inicio</a>
+                <a href="{{ path('app_product_index') }}">Productos</a>
+                <a href="{{ path('app_login') }}">Login</a>
+                {% if app.user %}
+                    <span>Hola, {{ app.user.userIdentifier }}</span>
+                    <a href="{{ path('app_logout') }}">Salir</a>
+                {% endif %}
+            </nav>
+        </header>
+        <main>
+            {% for message in app.flashes('success') %}
+                <div class="flash-success">{{ message }}</div>
+            {% endfor %}
+            {% for message in app.flashes('error') %}
+                <div class="flash-error">{{ message }}</div>
+            {% endfor %}
+
+            {% block body %}{% endblock %}
+        </main>
     </body>
 </html>

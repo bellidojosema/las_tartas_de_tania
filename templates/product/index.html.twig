@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Productos{% endblock %}
+
+{% block body %}
+    <h1>Gestión de productos</h1>
+    <p><a class="btn" href="{{ path('app_product_new') }}">Nuevo producto</a></p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Categoría</th>
+                <th>Precio</th>
+                <th>Stock</th>
+                <th>Disponible</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for product in products %}
+            <tr>
+                <td>{{ product.name }}</td>
+                <td>{{ product.category }}</td>
+                <td>{{ product.price|number_format(2, ',', '.') }} €</td>
+                <td>{{ product.stock }}</td>
+                <td>{{ product.isAvailable ? 'Sí' : 'No' }}</td>
+                <td>
+                    <a class="btn btn-secondary" href="{{ path('app_product_edit', {id: product.id}) }}">Editar</a>
+                    <form method="post" action="{{ path('app_product_delete', {id: product.id}) }}" style="display:inline" onsubmit="return confirm('¿Eliminar este producto?');">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete_product_' ~ product.id) }}">
+                        <button class="btn btn-danger">Eliminar</button>
+                    </form>
+                </td>
+            </tr>
+        {% else %}
+            <tr><td colspan="6">No hay productos creados todavía.</td></tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
