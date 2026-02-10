@@ -91,20 +91,6 @@ class Product
         return $this;
     }
 
-
-
-    public function getCategoryRef(): ?Category
-    {
-        return $this->categoryRef;
-    }
-
-    public function setCategoryRef(?Category $categoryRef): self
-    {
-        $this->categoryRef = $categoryRef;
-
-        return $this;
-    }
-
     public function getPrice(): float
     {
         return $this->price;

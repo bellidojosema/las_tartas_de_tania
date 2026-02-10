@@ -8,4 +8,13 @@
     <div class="form-check mb-3">{{ form_row(form.isAvailable) }}</div>
 
     <button class="btn btn-danger">{{ button_label|default('Guardar') }}</button>
+    {{ form_row(form.name) }}
+    {{ form_row(form.description) }}
+    {{ form_row(form.category) }}
+    {{ form_row(form.price) }}
+    {{ form_row(form.stock) }}
+    {{ form_row(form.imageUrl) }}
+    {{ form_row(form.isAvailable) }}
+
+    <button class="btn">{{ button_label|default('Guardar') }}</button>
 {{ form_end(form) }}

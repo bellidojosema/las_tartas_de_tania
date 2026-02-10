@@ -10,4 +10,9 @@
             <a class="btn btn-link px-0 mt-2" href="{{ path('app_product_index') }}">Volver al listado</a>
         </div>
     </div>
+    <h1>Editar producto</h1>
+
+    {{ include('product/_form.html.twig', {form: form, button_label: 'Actualizar'}) }}
+
+    <p><a href="{{ path('app_product_index') }}">Volver al listado</a></p>
 {% endblock %}
