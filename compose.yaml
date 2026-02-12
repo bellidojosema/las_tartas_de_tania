@@ -1,57 +1,42 @@
-version: "3.8"
-
 services:
   php:
-    image: php:8.4-cli
+    # Esta imagen siempre funciona y trae PHP 8.4
+    image: php:8.4-fpm-bookworm
     container_name: tartas_php
-    build:
-      context: .
-      dockerfile: Dockerfile
     volumes:
-      - .:/var/www/html
-    working_dir: /var/www/html
+      - .:/app
+    working_dir: /app
     ports:
       - "8001:8000"
+    environment:
+      DATABASE_URL: "mysql://app:root@database:3306/tartas_tania?serverVersion=mariadb-10.11.2"
     depends_on:
-      - database
-    tty: true
-    stdin_open: true
+      database:
+        condition: service_healthy
     networks:
       - tartas_net
-    command: tail -f /dev/null
+    # Instalamos lo necesario y levantamos el servidor interno de Symfony
+    entrypoint: ["sh", "-c", "apt-get update && apt-get install -y unzip libicu-dev && docker-php-ext-install pdo_mysql intl && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && php -S 0.0.0.0:8000 -t public"]
 
   database:
-    image: postgres:16-alpine
+    image: mariadb:10.11
     container_name: tartas_db
     environment:
-      POSTGRES_DB: tartas_tania
-      POSTGRES_USER: app
-      POSTGRES_PASSWORD: root
+      MARIADB_DATABASE: tartas_tania
+      MARIADB_USER: app
+      MARIADB_PASSWORD: root
+      MARIADB_ROOT_PASSWORD: root
     ports:
-      - "5432:5432"
+      - "3306:3306"
     volumes:
-      - database_data:/var/lib/postgresql/data
+      - database_data:/var/lib/mysql
     networks:
       - tartas_net
     healthcheck:
-      test: ["CMD", "pg_isready", "-d", "tartas_tania", "-U", "app"]
+      test: ["CMD", "mariadb-admin", "ping", "-h", "localhost", "-u", "app", "-proot"]
       interval: 5s
       timeout: 5s
       retries: 5
-      start_period: 10s
-
-  pgadmin:
-    image: dpage/pgadmin4:7
-    container_name: tartas_pgadmin
-    environment:
-      PGADMIN_DEFAULT_EMAIL: admin@admin.com
-      PGADMIN_DEFAULT_PASSWORD: admin
-    ports:
-      - "8081:80"
-    depends_on:
-      - database
-    networks:
-      - tartas_net
 
 volumes:
   database_data:

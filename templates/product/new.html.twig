@@ -1,18 +1,35 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Nuevo producto{% endblock %}
+{% block title %}Nuevo producto | Las Tartas de Tania{% endblock %}
 
 {% block body %}
-    <div class="card shadow-sm">
-        <div class="card-body">
-            <h1 class="h4">Crear producto</h1>
-            {{ include('product/_form.html.twig', {form: form, button_label: 'Crear'}) }}
-            <a class="btn btn-link px-0 mt-2" href="{{ path('app_product_index') }}">Volver al listado</a>
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            {# Cabecera simple #}
+            <div class="d-flex align-items-center mb-4">
+                <div>
+                    <h1 class="h3 mb-0 fw-bold text-danger">Crear nuevo producto</h1>
+                    <p class="text-muted mb-0">Añade una nueva delicia al catálogo</p>
+                </div>
+            </div>
+
+            {# Tarjeta del formulario #}
+            <div class="card shadow-sm border-0 rounded-3">
+                <div class="card-body p-4">
+                    {{ include('product/_form.html.twig', {
+                        form: form,
+                        button_label: 'Guardar producto'
+                    }) }}
+
+                    <hr class="my-4 text-muted opacity-25">
+
+                    <div class="text-center">
+                        <a class="btn btn-link text-secondary text-decoration-none" href="{{ path('app_product_index') }}">
+                            ← Cancelar y volver al listado
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <h1>Crear producto</h1>
-
-    {{ include('product/_form.html.twig', {form: form, button_label: 'Crear'}) }}
-
-    <p><a href="{{ path('app_product_index') }}">Volver al listado</a></p>
 {% endblock %}
