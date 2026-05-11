@@ -39,12 +39,10 @@ composer install
 6. Iniciar el servidor:
    symfony serve
    
-🔐 Credenciales de PruebaPara probar todas las funcionalidades de administración (crear, editar y borrar), usa las siguientes cuentas cargadas:
-Rol: Administrador
-Email: admin@taniatartas.com
-Contraseña: admin123
+## 🔐 Credenciales de Prueba
 
-Rol: Cliente
-Email: cliente@hola.com
-Contraseña: cliente123
+| Rol | Email | Contraseña |
+| :--- | :--- | :--- |
+| **Administrador** | `admin@taniatartas.com` | `admin123` |
+| **Cliente** | `cliente@hola.com` | `cliente123` |
 
