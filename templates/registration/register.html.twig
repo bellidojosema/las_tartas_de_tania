@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Crear Cuenta - Las Tartas de Tania{% endblock %}
+
+{% block body %}
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body p-5">
+                    <div class="text-center mb-4">
+                        <h1 class="h3 mb-3 fw-bold text-danger">Únete a la familia</h1>
+                        <p class="text-muted">Crea tu cuenta para disfrutar de las mejores tartas</p>
+                    </div>
+
+                    {{ form_errors(registrationForm) }}
+
+                    {{ form_start(registrationForm) }}
+                    <div class="row">
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label fw-bold small">Tu Email</label>
+                            {{ form_widget(registrationForm.email, {'attr': {'class': 'form-control', 'placeholder': 'tu@email.com'}}) }}
+                            <div class="text-danger small">{{ form_errors(registrationForm.email) }}</div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-bold small">Contraseña</label>
+                        {{ form_widget(registrationForm.plainPassword, {'attr': {'class': 'form-control', 'placeholder': 'Mínimo 6 caracteres'}}) }}
+                        <div class="text-danger small">{{ form_errors(registrationForm.plainPassword) }}</div>
+                    </div>
+
+                    <div class="mb-4 mt-4">
+                        <div class="form-check small text-muted d-flex align-items-center">
+                            {# Renderizamos el checkbox sin su etiqueta automática #}
+                            {{ form_widget(registrationForm.agreeTerms, {
+                                'attr': {'class': 'form-check-input me-2'},
+                                'label': false
+                            }) }}
+                            <label class="form-check-label mb-0" for="{{ registrationForm.agreeTerms.vars.id }}">
+                                Acepto los términos y condiciones de la pastelería
+                            </label>
+                        </div>
+                        <div class="text-danger small">{{ form_errors(registrationForm.agreeTerms) }}</div>
+                    </div>
+
+                    <button type="submit" class="btn btn-danger w-100 py-2 shadow-sm fw-bold">
+                        Completar Registro
+                    </button>
+                    {{ form_end(registrationForm) }}
+
+                    <div class="text-center mt-4 pt-3 border-top">
+                        <p class="small text-muted mb-0">¿Ya tienes una cuenta?</p>
+                        <a href="{{ path('app_login') }}" class="text-danger fw-bold text-decoration-none small">Inicia sesión</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

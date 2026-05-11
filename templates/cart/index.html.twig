@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mi Carrito - Las Tartas de Tania{% endblock %}
+
+{% block body %}
+    <h1 class="text-danger fw-bold mb-4 text-center py-5">🛒 Tu Carrito de Compra</h1>
+
+    <div class="card shadow-sm border-0 p-4">
+        {% if items|length > 0 %}
+            <table class="table align-middle">
+                <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Precio</th>
+                    <th class="text-center">Cantidad</th>
+                    <th class="text-end">Total</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for item in items %}
+                    <tr>
+                        <td>
+                            <span class="fw-bold text-dark">{{ item.product.name }}</span>
+                        </td>
+                        <td>{{ item.product.price|number_format(2, ',', '.') }}€</td>
+                        <td class="text-center">
+                            <span class="badge bg-light text-dark border px-3 py-2">{{ item.quantity }}</span>
+                        </td>
+                        <td class="text-end fw-bold">{{ (item.product.price * item.quantity)|number_format(2, ',', '.') }}€</td>
+                        <td class="text-end">
+                            <a href="{{ path('app_cart_remove', {id: item.product.id}) }}" class="btn btn-outline-danger btn-sm">
+                                🗑️ Quitar
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+                <tfoot>
+                <tr class="h4">
+                    <td colspan="3" class="text-end fw-bold">Total Pedido:</td>
+                    <td class="text-end text-success fw-bold">{{ total|number_format(2, ',', '.') }}€</td>
+                    <td></td>
+                </tr>
+                </tfoot>
+            </table>
+
+            <div class="d-flex justify-content-between mt-4">
+                <a href="{{ path('app_product_index') }}" class="btn btn-outline-secondary">Seguir Comprando</a>
+                <a href="{{ path('app_checkout') }}" class="btn btn-danger btn-lg px-5 shadow">Finalizar Pedido</a>
+            </div>
+        {% else %}
+            <div class="text-center py-5">
+                <p class="text-muted h5">Tu carrito está vacío. ¡Echa un vistazo a nuestras tartas!</p>
+                {# Cambiamos 'app_home' por 'app_product_index' #}
+                <a href="{{ path('app_product_index') }}" class="btn btn-danger mt-3 px-4 shadow-sm">
+                    Ver Catálogo de Productos
+                </a>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

@@ -1,0 +1,34 @@
+{{ form_start(form) }}
+<div class="mb-4">
+    {{ form_label(form.name, 'Nombre de la tarta', {'label_attr': {'class': 'form-label fw-bold text-dark'}}) }}
+    <div class="input-group">
+        <span class="input-group-text bg-light border-end-0 text-muted"><i class="bi bi-tag"></i></span>
+        {{ form_widget(form.name, {'attr': {'class': 'form-control border-start-0', 'placeholder': 'Ej: Tarta de Queso y Arándanos'}}) }}
+    </div>
+    {{ form_errors(form.name) }}
+</div>
+
+<div class="mb-4">
+    {{ form_label(form.price, 'Precio (€)', {'label_attr': {'class': 'form-label fw-bold text-dark'}}) }}
+    <div class="input-group">
+        <span class="input-group-text bg-light border-end-0 text-muted"><i class="bi bi-currency-euro"></i></span>
+        {{ form_widget(form.price, {'attr': {'class': 'form-control border-start-0', 'placeholder': '0.00'}}) }}
+    </div>
+    {{ form_errors(form.price) }}
+</div>
+
+<div class="mb-4">
+    {{ form_label(form.category, 'Categoría', {'label_attr': {'class': 'form-label fw-bold text-dark'}}) }}
+    <div class="input-group">
+        <span class="input-group-text bg-light border-end-0 text-muted"><i class="bi bi-grid"></i></span>
+        {{ form_widget(form.category, {'attr': {'class': 'form-select border-start-0'}}) }}
+    </div>
+    {{ form_errors(form.category) }}
+</div>
+
+<div class="d-grid gap-2 mt-4">
+    <button class="btn btn-danger btn-lg shadow-sm fw-bold">
+        <i class="bi bi-check-circle me-2"></i>{{ button_label|default('Guardar Producto') }}
+    </button>
+</div>
+{{ form_end(form) }}

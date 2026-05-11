@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Entrar - Las Tartas de Tania{% endblock %}
+
+{% block body %}
+    <div class="row justify-content-center">
+        <div class="col-md-5">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body p-5">
+                    <div class="text-center mb-4">
+                        <h1 class="h3 mb-3 fw-bold text-danger">¡Hola de nuevo!</h1>
+                        <p class="text-muted">Inicia sesión para gestionar tus pedidos</p>
+                    </div>
+
+                    <form method="post">
+                        {% if error %}
+                            <div class="alert alert-danger shadow-sm border-0 small">
+                                {{ error.messageKey|trans(error.messageData, 'security') }}
+                            </div>
+                        {% endif %}
+
+                        <div class="mb-3">
+                            <label for="inputEmail" class="form-label fw-bold small">Correo Electrónico</label>
+                            <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus placeholder="ejemplo@correo.com">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="inputPassword" class="form-label fw-bold small">Contraseña</label>
+                            <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required placeholder="••••••••">
+                        </div>
+
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+                        {#
+                        Descomenta esto si quieres el checkbox de "Recordarme"
+                        <div class="checkbox mb-3 small">
+                            <label>
+                                <input type="checkbox" name="_remember_me"> Recordarme
+                            </label>
+                        </div>
+                        #}
+
+                        <button class="btn btn-danger w-100 py-2 shadow-sm fw-bold mt-3" type="submit">
+                            Entrar a mi cuenta
+                        </button>
+                    </form>
+
+                    <div class="text-center mt-4 pt-3 border-top">
+                        <p class="small text-muted mb-0">¿Aún no tienes cuenta?</p>
+                        <a href="{{ path('app_register') }}" class="text-danger fw-bold text-decoration-none small">Regístrate aquí</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

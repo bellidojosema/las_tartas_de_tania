@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nueva Categoría - Las Tartas de Tania{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                {# Cabecera Estilo Tania #}
+                <div class="mb-4">
+                    <h1 class="display-5 text-danger fw-bold mb-0">Categorías</h1>
+                    <p class="text-muted fs-5">Organiza tus productos por tipo de repostería</p>
+                </div>
+
+                <div class="card shadow-sm border-0">
+                    <div class="card-body p-4">
+                        <h5 class="card-title fw-bold mb-4 text-dark">Añadir nueva familia de productos</h5>
+
+                        {{ include('category/_form.html.twig') }}
+
+                        <hr class="my-4 text-muted opacity-25">
+
+                        <div class="d-flex justify-content-start">
+                            <a href="{{ path('app_category_index') }}" class="btn btn-outline-secondary btn-sm px-3 shadow-sm">
+                                <i class="bi bi-arrow-left me-1"></i> Volver al listado
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

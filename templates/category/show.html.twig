@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Detalle de Categoría - Las Tartas de Tania{% endblock %}
+
+{% block body %}
+    <div class="mb-4">
+        <h1 class="h2 text-danger fw-bold">Detalle de la Categoría</h1>
+        <p class="text-muted">Visualizando la información de la categoría seleccionada.</p>
+    </div>
+
+    <div class="card shadow-sm border-0 mb-4">
+        <div class="card-body p-0">
+            <table class="table table-hover mb-0">
+                <tbody>
+                <tr>
+                    <th class="ps-4 bg-light" style="width: 200px;">ID</th>
+                    <td class="ps-4">#{{ category.id }}</td>
+                </tr>
+                <tr>
+                    <th class="ps-4 bg-light">Nombre</th>
+                    <td class="ps-4"><strong>{{ category.name }}</strong></td>
+                </tr>
+                <tr>
+                    <th class="ps-4 bg-light">Productos en esta categoría</th>
+                    <td class="ps-4">
+                            <span class="badge rounded-pill bg-light text-dark border">
+                                {{ category.products|length }} productos
+                            </span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="d-flex gap-2">
+        <a href="{{ path('app_category_index') }}" class="btn btn-outline-secondary">
+            <i class="bi bi-arrow-left"></i> Volver al listado
+        </a>
+
+        {# Solo el Administrador puede ver los botones de acción #}
+        {% if is_granted('ROLE_ADMIN') %}
+            <a href="{{ path('app_category_edit', {'id': category.id}) }}" class="btn btn-warning">
+                <i class="bi bi-pencil-square"></i> Editar Categoría
+            </a>
+
+            {# Incluimos el formulario de borrado específico de categorías #}
+            {{ include('category/_delete_form.html.twig') }}
+        {% endif %}
+    </div>
+{% endblock %}

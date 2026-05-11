@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Agendar Cita - Las Tartas de Tania{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                {# Encabezado con estilo #}
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <div>
+                        <h1 class="h2 text-danger fw-bold mb-0">Agendar Nueva Cita</h1>
+                        <p class="text-muted">Indica cuándo y dónde recogerás tu pedido</p>
+                    </div>
+                </div>
+
+                {# Tarjeta del Formulario #}
+                <div class="card shadow-sm border-0">
+                    <div class="card-body p-4">
+                        {{ include('pickup_appointment/_form.html.twig') }}
+
+                        <hr class="my-4 text-muted opacity-25">
+
+                        <div class="d-flex justify-content-start">
+                            <a href="{{ path('app_pickup_appointment_index') }}" class="btn btn-outline-secondary btn-sm">
+                                <i class="bi bi-arrow-left"></i> Volver al calendario
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

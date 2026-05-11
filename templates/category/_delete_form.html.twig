@@ -1,0 +1,7 @@
+{# templates/product/_delete_form.html.twig #}
+<form method="post" action="{{ path('app_category_delete', {'id': category.id}) }}" onsubmit="return confirm('¿Estás seguro de eliminar esta categoria?');" style="display:inline-block">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ category.id) }}">
+    <button class="btn btn-danger btn-sm" style="border-top-left-radius: 0; border-bottom-left-radius: 0;">
+        Delete
+    </button>
+</form>

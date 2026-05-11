@@ -1,0 +1,24 @@
+{{ form_start(form) }}
+<div class="mb-4">
+    {{ form_label(form.name, 'Nombre de la categoría', {'label_attr': {'class': 'form-label fw-bold text-dark'}}) }}
+    <div class="input-group">
+            <span class="input-group-text bg-light border-end-0 text-muted">
+                <i class="bi bi-grid-3x3-gap"></i>
+            </span>
+        {{ form_widget(form.name, {
+            'attr': {
+                'class': 'form-control border-start-0',
+                'placeholder': 'Ej: Tartas de Queso, Galletas, Repostería Creativa...'
+            }
+        }) }}
+    </div>
+    <small class="text-muted">Usa un nombre descriptivo para agrupar tus productos.</small>
+    {{ form_errors(form.name) }}
+</div>
+
+<div class="d-grid gap-2 mt-4">
+    <button class="btn btn-danger btn-lg shadow-sm fw-bold">
+        <i class="bi bi-check-circle me-2"></i>{{ button_label|default('Guardar Categoría') }}
+    </button>
+</div>
+{{ form_end(form) }}

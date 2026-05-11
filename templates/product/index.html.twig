@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nuestros Productos - Las Tartas de Tania{% endblock %}
+
+{% block body %}
+    {# Cabecera con Estilo (Imagen image_ee118f.png) #}
+    <div class="d-flex justify-content-between align-items-end mb-4">
+        <div>
+            <h1 class="h2 text-danger fw-bold mb-0">Productos</h1>
+            <p class="text-muted">Gestiona el catálogo de tus delicias artesanas</p>
+        </div>
+
+        {% if is_granted('ROLE_ADMIN') %}
+            <a href="{{ path('app_product_new') }}" class="btn btn-danger px-4 shadow-sm mb-2">
+                <i class="bi bi-plus-lg"></i> Añadir Nueva Tarta
+            </a>
+        {% endif %}
+    </div>
+
+    {# Tabla de Productos #}
+    <div class="card shadow-sm border-0 mb-4">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="table-light">
+                <tr>
+                    <th class="ps-4">ID</th>
+                    <th>Nombre</th>
+                    <th>Categoría</th>
+                    <th>Precio</th>
+                    <th class="text-center pe-4">Acciones</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for product in products %}
+                    <tr>
+                        <td class="ps-4 text-muted">#{{ product.id }}</td>
+                        <td class="fw-bold text-dark">{{ product.name }}</td>
+                        <td>
+                            <span class="badge bg-light text-danger border">
+                                {{ product.category.name }}
+                            </span>
+                        </td>
+                        <td class="fw-medium text-success">{{ product.price|number_format(2, ',', '.') }}€</td>
+                        <td class="text-center pe-4">
+                            <div class="btn-group shadow-sm" role="group">
+                                <a href="{{ path('app_cart_add', {'id': product.id}) }}" class="btn btn-success btn-sm">🛒 Comprar</a>
+                                <a href="{{ path('app_product_show', {'id': product.id}) }}" class="btn btn-outline-secondary btn-sm">Ver</a>
+                                {% if is_granted('ROLE_ADMIN') %}
+                                    <a href="{{ path('app_product_edit', {'id': product.id}) }}" class="btn btn-warning btn-sm">Editar</a>
+                                    {# Incluimos el borrado inline para evitar saltos de línea #}
+                                    <form method="post" action="{{ path('app_product_delete', {'id': product.id}) }}" onsubmit="return confirm('¿Seguro que quieres eliminar esta tarta?');" style="display:inline-block">
+                                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ product.id) }}">
+                                        <button class="btn btn-danger btn-sm" style="border-top-left-radius: 0; border-bottom-left-radius: 0;">Borrar</button>
+                                    </form>
+                                {% endif %}
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+{% endblock %}

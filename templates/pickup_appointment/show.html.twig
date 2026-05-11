@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}PickupAppointment{% endblock %}
+
+{% block body %}
+    <h1>PickupAppointment</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ pickup_appointment.id }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ pickup_appointment.date ? pickup_appointment.date|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Location</th>
+                <td>{{ pickup_appointment.location }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_pickup_appointment_index') }}">back to list</a>
+
+    <a href="{{ path('app_pickup_appointment_edit', {'id': pickup_appointment.id}) }}">edit</a>
+
+    {{ include('pickup_appointment/_delete_form.html.twig') }}
+{% endblock %}

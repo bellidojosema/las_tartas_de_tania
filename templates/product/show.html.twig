@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Detalle de {{ product.name }}{% endblock %}
+
+{% block body %}
+    <div class="mb-4">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ path('app_product_index') }}">Productos</a></li>
+                <li class="breadcrumb-item active">{{ product.name }}</li>
+            </ol>
+        </nav>
+    </div>
+
+    <div class="card shadow-sm border-0">
+        <div class="card-header bg-tania-soft py-3">
+            <h1 class="h3 mb-0 text-danger fw-bold">{{ product.name }}</h1>
+        </div>
+        <div class="card-body p-4">
+            <div class="row">
+                <div class="col-md-8">
+                    <table class="table table-borderless">
+                        <tbody>
+                        <tr>
+                            <th class="text-muted" style="width: 200px;">Referencia (ID)</th>
+                            <td>#{{ product.id }}</td>
+                        </tr>
+                        <tr>
+                            <th class="text-muted">Categoría</th>
+                            <td><span class="badge bg-light text-dark border">{{ product.category.name }}</span></td>
+                        </tr>
+                        <tr>
+                            <th class="text-muted">Precio de venta</th>
+                            <td class="h4 text-success fw-bold">{{ product.price|number_format(2, ',', '.') }}€</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <hr class="my-4 text-muted opacity-25">
+
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                    <a href="{{ path('app_product_index') }}" class="btn btn-outline-secondary">Volver al listado</a>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a href="{{ path('app_product_edit', {'id': product.id}) }}" class="btn btn-warning">Editar</a>
+
+                        {# Para el botón de eliminar (que suele ser un formulario) #}
+                        {{ include('product/_delete_form.html.twig') }}
+                    {% endif %}
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

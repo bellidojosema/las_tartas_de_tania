@@ -1,0 +1,51 @@
+{# templates/pickup_appointment/_form.html.twig #}
+{{ form_start(form) }}
+
+<div class="mb-4">
+    {{ form_label(form.date, '¿Cuándo vendrás?', {'label_attr': {'class': 'form-label fw-bold text-dark'}}) }}
+    <div class="input-group">
+        <span class="input-group-text bg-light border-end-0 text-muted"><i class="bi bi-clock"></i></span>
+        {{ form_widget(form.date, {'attr': {'class': 'form-control border-start-0'}}) }}
+    </div>
+    <small class="text-muted">Selecciona el día y la hora exacta.</small>
+    {{ form_errors(form.date) }}
+</div>
+
+<div class="mb-4">
+    {{ form_label(form.location, 'Punto de recogida', {'label_attr': {'class': 'form-label fw-bold text-dark'}}) }}
+    <div class="input-group">
+        <span class="input-group-text bg-light border-end-0 text-muted"><i class="bi bi-geo-alt"></i></span>
+        {{ form_widget(form.location, {'attr': {'class': 'form-select border-start-0'}}) }}
+    </div>
+    <small class="text-muted">Elige entre nuestra tienda o el obrador principal.</small>
+    {{ form_errors(form.location) }}
+</div>
+
+{# Nuevo diseño para Usuario #}
+<div class="mb-4">
+    {{ form_label(form.user, 'Usuario', {'label_attr': {'class': 'form-label fw-bold text-dark'}}) }}
+    <div class="input-group">
+        <span class="input-group-text bg-light border-end-0 text-muted"><i class="bi bi-person"></i></span>
+        {{ form_widget(form.user, {'attr': {'class': 'form-select border-start-0'}}) }}
+    </div>
+    {{ form_errors(form.user) }}
+</div>
+
+{# Nuevo diseño para Pedido #}
+<div class="mb-4">
+    {{ form_label(form.order, 'Pedido', {'label_attr': {'class': 'form-label fw-bold text-dark'}}) }}
+    <div class="input-group">
+        <span class="input-group-text bg-light border-end-0 text-muted"><i class="bi bi-box-seam"></i></span>
+        {{ form_widget(form.order, {'attr': {'class': 'form-select border-start-0'}}) }}
+    </div>
+    {{ form_errors(form.order) }}
+</div>
+
+<div class="d-grid gap-2 mt-4">
+    <button class="btn btn-danger btn-lg shadow-sm fw-bold">
+        <i class="bi bi-calendar-check me-2"></i>{{ button_label|default('Confirmar y Guardar Cita') }}
+    </button>
+</div>
+
+{# Importante: render_rest en false para que no se dupliquen campos al final #}
+{{ form_end(form, {'render_rest': false}) }}

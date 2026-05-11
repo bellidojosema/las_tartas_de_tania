@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Editar cita{% endblock %}
+
+{% block body %}
+    <h1>Editar cita</h1>
+
+    {{ include('pickup_appointment/_form.html.twig', {'button_label': 'Actualizar'}) }}
+
+    <hr class="my-4 text-muted opacity-25">
+
+    <div class="d-flex justify-content-start">
+        <a href="{{ path('app_pickup_appointment_index') }}" class="btn btn-outline-secondary btn-sm px-3 shadow-sm">
+            <i class="bi bi-arrow-left me-1"></i> Volver al calendario
+        </a>
+    </div>
+
+{% endblock %}
